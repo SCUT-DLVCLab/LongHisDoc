@@ -108,8 +108,8 @@ def process_item(d):
     except Exception as e:
         print(f"处理失败: {str(e)}")
        
-json_file_path = ''
-out_json_path = ''
+json_file_path = '' # Input the path to the inference result JSON for scoring.
+out_json_path = ''  # The output path.
 
 # 读取数据
 with open(json_file_path, 'r', encoding='utf-8') as f:
