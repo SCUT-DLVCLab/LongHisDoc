@@ -18,7 +18,7 @@ pip install -r requirements.txt
 
 ## 🔎 Evaluation
 
-* Our evaluation pipeline consists of three stages: *response generation*, *answer extraction*, and *score calculation*. The corresponding code for each stage can be found in their respective directories🚀.
+* Our evaluation pipeline consists of three stages: *response generation*, *answer extraction*, and *score calculation*. The corresponding code for each stage can be found in their respective directories.
 
 ## 📜 License
 The data should be used and distributed under [ (CC BY-NC-ND 4.0)](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-hans) for non-commercial research purposes.
