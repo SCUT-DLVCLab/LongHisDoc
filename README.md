@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 * Our evaluation pipeline consists of three stages: *response generation*, *answer extraction*, and *score calculation*. The corresponding code for each stage can be found in their respective directories.
 
-##* A. Response Generation
+#### * A. Response Generation
 You can find all inference code of the models in folder *response_generation*.
 #### Open-source Model
 For open-source models, we perform inference locally. After modifying the model path and output file path in the file to your own paths, you can start model inference. Taking the experimental setup with image input for Qwen2.5-VL as an example.
@@ -37,7 +37,7 @@ python response_generation/gpt-4o-img.py
 
 Once the inference is completed, you will obtain a JSON file with the same format as *LongHisDoc.json*, but with an additional key named *"model_res"*.
 
-##* B. Answer Extraction
+#### * B. Answer Extraction
 After obtaining the model output, we use GPT-4o to extract the final answer. You need to set the path to the model inference results and the path to final answer in the Python file. Then run the code.
 
 ```bash
@@ -46,7 +46,7 @@ python answer_extraction/LLM_extract_multiple_gpt-4o.py
 
 Once the code completes, you will obtain a JSON file with the same format as the input model output, but with an additional key named "LLM_extracted".
 
-##* C. Score Calculation
+#### * C. Score Calculation
 After obtaining the extracted ANSWER, we can run the following code to compute the scores.
 
 
