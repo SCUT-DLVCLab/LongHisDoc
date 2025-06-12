@@ -22,10 +22,10 @@ pip install -r requirements.txt
 #### A. Response Generation
 You can find all inference code of the models in folder *response_generation*.
 #### Open-source Model
-For open-source models, we perform inference locally. After modifying the model path and output file path in the file to your own paths, you can start model inference. Taking the experimental setup with image input for Qwen2.5-VL as an example.
+For open-source models, we perform inference locally. After modifying the model path in the file to your own paths, you can start model inference. Taking the experimental setup with image input for Qwen2.5-VL as an example.
 
 ```bash
-CUDA_VISIBLE_DEVICES=0 python response_generation/qwen2_5-vl-img.py
+CUDA_VISIBLE_DEVICES=0 python response_generation/qwen2_5-vl-img.py --model_path './path/to/your/model'
 ```
 
 #### API Model
