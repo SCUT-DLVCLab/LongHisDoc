@@ -47,7 +47,20 @@ class DocOwlInfer():
         answer = self.model.chat(messages=messages, images=images, tokenizer=self.tokenizer)
         return answer
 
-model_path = './Model/DocOwl2'
+import argparse
+
+
+parser = argparse.ArgumentParser(description="Receive the model path as an external input")
+
+# Add the model path argument
+parser.add_argument('--model_path', type=str, default='./Model/DocOwl2', help='Path to the model')
+
+# Parse the command line arguments
+args = parser.parse_args()
+
+# Use the provided model path
+model_path = args.model_path
+
 docowl = DocOwlInfer(ckpt_path=model_path)
 
 

@@ -5,8 +5,21 @@ from tqdm import tqdm
 import json
 from generate_prompt import text_system_prompt,text_generate_prompt,img_system_prompt,img_generate_prompt
 
+import argparse
 
-model_path ="./Model/llava-v1.6-mistral-7b-hf"
+
+parser = argparse.ArgumentParser(description="Receive the model path as an external input")
+
+# Add the model path argument
+parser.add_argument('--model_path', type=str, default='./Model/llava-v1.6-mistral-7b-hf', help='Path to the model')
+
+# Parse the command line arguments
+args = parser.parse_args()
+
+# Use the provided model path
+model_path = args.model_path
+
+
 processor = LlavaNextProcessor.from_pretrained(model_path)
 
 model = LlavaNextForConditionalGeneration.from_pretrained(model_path, torch_dtype=torch.float16, low_cpu_mem_usage=True,attn_implementation="flash_attention_2", device_map="auto") 

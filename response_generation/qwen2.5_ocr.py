@@ -4,18 +4,32 @@ import json
 from tqdm import tqdm
 import torch
 from generate_prompt import text_system_prompt,text_generate_prompt,img_system_prompt,img_generate_prompt
-model_name = "./Model/Qwen2.5-7B-Instruct"
+
+import argparse
+
+
+parser = argparse.ArgumentParser(description="Receive the model path as an external input")
+
+# Add the model path argument
+parser.add_argument('--model_path', type=str, default='./Model/InternVL3-8B', help='Path to the model')
+
+# Parse the command line arguments
+args = parser.parse_args()
+
+# Use the provided model path
+model_path = args.model_path
+
 
 model = AutoModelForCausalLM.from_pretrained(
-    model_name,
+    model_path,
     torch_dtype=torch.bfloat16,
     device_map="auto",
     attn_implementation="flash_attention_2",
 )
-tokenizer = AutoTokenizer.from_pretrained(model_name)
+tokenizer = AutoTokenizer.from_pretrained(model_path)
 
 
-def truncate_prompt_to_token_limit(prompt, max_prompt_tokens=32000, encoding_name=model_name):
+def truncate_prompt_to_token_limit(prompt, max_prompt_tokens=32000, encoding_name=model_path):
     """
     截断 prompt 字符串，使其 token 数 <= max_prompt_tokens。
     返回截断后的 prompt 字符串。
@@ -76,15 +90,11 @@ def read_json(json_p,page):
     return punc_text
 
 
-# json_file_path = '/data1/szy/LLM_code/GujiDoc_collections/data_json_kv/merged_data_3_6_kv_all_fixed_final.json'
-json_file_path = '/data1/szy/LLM_code/GujiDoc_collections/LCHD_benchmark_test_code/data/merged_data_3_26_kv_all_fixed_final_input_pages_book_name_fangbo.json'
-# json_file_path = '/data1/szy/LLM_code/GujiDoc_collections/test_code/generator_infer/res/qwen2_5-vl/Qwen2.5-VL-7B-Instruct_with_evidence_ocr.json'
+json_file_path = './LongHisDoc.json'
 
-images_dir="/data1/szy/LLM_code/GujiDoc_collections/biaozhu_shuju_final_images_under_1024"
+ocr_dir = "./OCR_Res"
 
-ocr_dir = "/data1/szy/LLM_code/GujiDoc_collections/guji_anno_3_6_ocr_res_final_sorted"
-
-out_json_path = '/data1/szy/LLM_code/GujiDoc_collections/LCHD_benchmark_test_code/res/LLM_OCR/'+ model_name.split("/")[-1] +'_4_20_test.json'
+out_json_path = './infer_res/' + model_path.split("/")[-1] +'_ocr.json'
 
 with open(json_file_path, 'r', encoding='utf-8') as json_file:
     classified_data = json.load(json_file)

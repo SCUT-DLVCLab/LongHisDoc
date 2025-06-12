@@ -12,9 +12,8 @@ client = OpenAI(api_key="", base_url="")
 
 MODEL_NAME = "qwen-max-latest"
 # 创建线程锁用于文件写入
-model_name = "./Model/Qwen2.5-VL-7B-Instruct"
 lock = threading.Lock()
-def truncate_prompt_to_token_limit(prompt, max_prompt_tokens=128000, encoding_name=model_name):
+def truncate_prompt_to_token_limit(prompt, max_prompt_tokens=128000, encoding_name="./Model/Qwen2.5-VL-7B-Instruct"):
     """
     截断 prompt 字符串，使其 token 数 <= max_prompt_tokens。
     返回截断后的 prompt 字符串。

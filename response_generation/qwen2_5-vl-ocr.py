@@ -12,7 +12,21 @@ import tiktoken
 from generate_prompt import text_system_prompt,text_generate_prompt,img_system_prompt,img_generate_prompt
 
 # default: Load the model on the available device(s)
-model_path="./Model/Qwen2.5-VL-7B-Instruct"
+
+import argparse
+
+
+parser = argparse.ArgumentParser(description="Receive the model path as an external input")
+
+# Add the model path argument
+parser.add_argument('--model_path', type=str, default="./Model/Qwen2.5-VL-7B-Instruct", help='Path to the model')
+
+# Parse the command line arguments
+args = parser.parse_args()
+
+# Use the provided model path
+model_path = args.model_path
+
 
 def truncate_prompt_to_token_limit(prompt, max_prompt_tokens=127500, encoding_name="./Model/Qwen2.5-VL-7B-Instruct"):
     """

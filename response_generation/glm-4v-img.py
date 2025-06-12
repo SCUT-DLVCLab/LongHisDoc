@@ -7,6 +7,7 @@ from PIL import Image
 import math
 from tqdm import tqdm
 from generate_prompt import text_system_prompt,text_generate_prompt,img_system_prompt,img_generate_prompt
+import argparse
 
 def concat_images(image_list, concat_num=1, column_num=3):
     interval = max(math.ceil(len(image_list) / concat_num), 1)
@@ -35,7 +36,17 @@ def concat_images(image_list, concat_num=1, column_num=3):
 
 
 device = "cuda"
-model_path = "./Model/glm-4v-9b"
+parser = argparse.ArgumentParser(description="Receive the model path as an external input")
+
+# Add the model path argument
+parser.add_argument('--model_path', type=str, default="./Model/glm-4v-9b", help='Path to the model')
+
+# Parse the command line arguments
+args = parser.parse_args()
+
+# Use the provided model path
+model_path = args.model_path
+
 tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
 
 model = AutoModelForCausalLM.from_pretrained(

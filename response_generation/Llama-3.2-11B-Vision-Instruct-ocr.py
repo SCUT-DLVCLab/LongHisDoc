@@ -6,17 +6,26 @@ from tqdm import tqdm
 import json
 from generate_prompt import text_system_prompt,text_generate_prompt,img_system_prompt,img_generate_prompt
 
+import argparse
 
+parser = argparse.ArgumentParser(description="Receive the model path as an external input")
 
+# Add the model path argument
+parser.add_argument('--model_path', type=str, default="./Model/Llama-3.2-11B-Vision-Instruct", help='Path to the model')
 
-model_id = "./Model/Llama-3.2-11B-Vision-Instruct"
+# Parse the command line arguments
+args = parser.parse_args()
+
+# Use the provided model path
+model_path = args.model_path
+
 
 model = MllamaForConditionalGeneration.from_pretrained(
-    model_id,
+    model_path,
     torch_dtype=torch.bfloat16,
     device_map="auto",
 )
-processor = AutoProcessor.from_pretrained(model_id)
+processor = AutoProcessor.from_pretrained(model_path)
 
 
 def infer_llm_with_ocr(text):
@@ -54,7 +63,7 @@ json_file_path = './LongHisDoc.json'
 
 ocr_dir = "./OCR_Res"
 
-out_json_path = './infer_res/Llama-3.2-11B-Vision-Instruct_ocr.json'
+out_json_path = './infer_res/' + model_path.split("/")[-1] +'_ocr.json'
 
     
 

@@ -4,7 +4,20 @@ from transformers import AutoModel, AutoTokenizer
 import json
 from tqdm import tqdm
 from generate_prompt import text_system_prompt,text_generate_prompt,img_system_prompt,img_generate_prompt
-model_path = "./Model/MiniCPM-o-2_6"
+import argparse
+
+
+parser = argparse.ArgumentParser(description="Receive the model path as an external input")
+
+# Add the model path argument
+parser.add_argument('--model_path', type=str, default="./Model/MiniCPM-o-2_6", help='Path to the model')
+
+# Parse the command line arguments
+args = parser.parse_args()
+
+# Use the provided model path
+model_path = args.model_path
+
 
 
 

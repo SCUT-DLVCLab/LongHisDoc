@@ -5,9 +5,19 @@ import json
 from tqdm import tqdm
 from generate_prompt import text_system_prompt,text_generate_prompt,img_system_prompt,img_generate_prompt
 import math
+import argparse
 
 
-model_path = "./Model/MiniCPM-V-2_6"
+parser = argparse.ArgumentParser(description="Receive the model path as an external input")
+
+# Add the model path argument
+parser.add_argument('--model_path', type=str, default="./Model/MiniCPM-V-2_6", help='Path to the model')
+
+# Parse the command line arguments
+args = parser.parse_args()
+
+# Use the provided model path
+model_path = args.model_path
 
 model = AutoModel.from_pretrained(model_path, trust_remote_code=True,
     attn_implementation='flash_attention_2', torch_dtype=torch.bfloat16) 

@@ -9,6 +9,7 @@ from transformers import AutoModel, AutoTokenizer,AutoConfig
 from tqdm import tqdm
 import json
 from generate_prompt import text_system_prompt,text_generate_prompt,img_system_prompt,img_generate_prompt
+import argparse
 
 IMAGENET_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_STD = (0.229, 0.224, 0.225)
@@ -112,24 +113,36 @@ def split_model(model_name):
 
 # If you set `load_in_8bit=True`, you will need two 80GB GPUs.
 # If you set `load_in_8bit=False`, you will need at least three 80GB GPUs.
-path = './Model/InternVL3-8B'
-device_map = split_model('./Model/InternVL3-8B')
+
+parser = argparse.ArgumentParser(description="Receive the model path as an external input")
+
+# Add the model path argument
+parser.add_argument('--model_path', type=str, default='./Model/InternVL3-8B', help='Path to the model')
+
+# Parse the command line arguments
+args = parser.parse_args()
+
+# Use the provided model path
+model_path = args.model_path
+
+
+device_map = split_model(model_path)
 model = AutoModel.from_pretrained(
-    path,
+    model_path,
     torch_dtype=torch.bfloat16,
     load_in_8bit=False,
     low_cpu_mem_usage=True,
     use_flash_attn=True,
     trust_remote_code=True,
     device_map=device_map).eval()
-tokenizer = AutoTokenizer.from_pretrained(path, trust_remote_code=True, use_fast=False)
+tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True, use_fast=False)
 
 
 json_file_path = './LongHisDoc.json'
 
 ocr_dir = "./OCR_Res"
 
-out_json_path = './infer_res/' + path.split("/")[-1] +'_ocr.json'
+out_json_path = './infer_res/' + model_path.split("/")[-1] +'_ocr.json'
 
 
 with open(json_file_path, 'r', encoding='utf-8') as json_file:

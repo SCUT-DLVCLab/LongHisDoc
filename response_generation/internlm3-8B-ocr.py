@@ -4,16 +4,29 @@ from generate_prompt import text_system_prompt,text_generate_prompt,img_system_p
 import json
 
 from tqdm import tqdm
+import argparse
 
-model_name = "./Model/internlm3-8b-instruct"
-tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
 
-model = AutoModelForCausalLM.from_pretrained(model_name, trust_remote_code=True, torch_dtype=torch.bfloat16,device_map="auto",
+parser = argparse.ArgumentParser(description="Receive the model path as an external input")
+
+# Add the model path argument
+parser.add_argument('--model_path', type=str, default='./Model/InternLm3-8B', help='Path to the model')
+
+# Parse the command line arguments
+args = parser.parse_args()
+
+# Use the provided model path
+model_path = args.model_path
+
+
+tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
+
+model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True, torch_dtype=torch.bfloat16,device_map="auto",
     attn_implementation="flash_attention_2").cuda()
 
 model = model.eval()
 
-def truncate_prompt_to_token_limit(prompt, max_prompt_tokens=32000, encoding_name="/data3/szy/Model/internlm3-8b-instruct"):
+def truncate_prompt_to_token_limit(prompt, max_prompt_tokens=32000, encoding_name="./Model/internlm3-8b-instruct"):
     """
     截断 prompt 字符串，使其 token 数 <= max_prompt_tokens。
     返回截断后的 prompt 字符串。
@@ -24,7 +37,7 @@ def truncate_prompt_to_token_limit(prompt, max_prompt_tokens=32000, encoding_nam
     if len(tokens) <= max_prompt_tokens:
         return prompt  # 无需截断
 
-    truncated_tokens = tokens[:max_prompt_tokens]  # 截取结尾部分（保留末尾语义）
+    truncated_tokens = tokens[:max_prompt_tokens]  # 截断
     truncated_prompt = enc.decode(truncated_tokens)
     return truncated_prompt
 
@@ -62,7 +75,7 @@ json_file_path = './LongHisDoc.json'
 
 ocr_dir = "./OCR_Res"
 
-out_json_path = './infer_res/' + model_name.split("/")[-1]  +'_ocr.json'
+out_json_path = './infer_res/' + model_path.split("/")[-1]  +'_ocr.json'
 
 with open(json_file_path, 'r', encoding='utf-8') as json_file:
     classified_data = json.load(json_file)
