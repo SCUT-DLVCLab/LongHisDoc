@@ -57,7 +57,7 @@ python score_calculation/compute_infer_acc_score.py
 The model scores are recorded in an Excel (.xlsx) file.
 
 ## 📊 Evaluation Result
-![LongHisDoc](LongHisDoc_Overview.png)
+![Evaluation Result](Evaluation_Res.png)
 
 ## 📜 License
 The data should be used and distributed under [ (CC BY-NC-ND 4.0)](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-hans) for non-commercial research purposes.
