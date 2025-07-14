@@ -245,17 +245,17 @@ if __name__ == "__main__":
         
         for data in guji_book:
 
-            if data["type"] == "单页问答":
+            if data["type"] == "Single Page":
                 sp_ls.append(data["score"])
 
-            elif data["type"] == "跨页问答":
+            elif data["type"] == "Cross Page":
                 cp_ls.append(data["score"])
                 
 
-            elif data["type"] == "多跳问答":
+            elif data["type"] == "Multi Hop":
                 mh_ls.append(data["score"])
 
-            elif data["type"] == "无法回答":
+            elif data["type"] == "Unanswerable":
                 ua_ls.append(data["score"])
 
 
@@ -329,7 +329,7 @@ if __name__ == "__main__":
     # 生成数据
     setting_name = input_json_file.split("/")[-1].replace(".json","")
     data = [
-        ['','单页','跨页','多跳','无法回答','Str','Int','Enum','LIST','Bool','None','text','layout','vis','None','综合'],
+        ['','SIN','CRO','MUL','UNA','Str','Int','Enum','LIST','Bool','None','text','layout','vis','None','Total'],
         [setting_name, sp_mean , cp_mean , mh_mean , ua_mean,str_mean,int_mean,enum_mean,list_mean,bool_mean,none_mean,text_mean,layout_mean, vis_ls_mean,none_mean,mean]
     ]
 
