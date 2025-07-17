@@ -5,7 +5,7 @@
 ## 📖 Introduction
 We present **LongHisDoc**, a pioneering benchmark specifically designed to evaluate the capabilities of LLMs and LVLMs in long-context historical document understanding tasks. This benchmark includes 101 historical documents across 10 categories, with 1,012 expert-annotated question-answer pairs covering four types, and the evidence for the questions is drawn from three modalities. 
 
-* The Q&A pairs are provided in json format and contain the following attributes:
+* The Q&A pairs are provided in json format (LongHisDoc.json) and contain the following attributes:
 ```
 {
             "doc_id": "9242",
