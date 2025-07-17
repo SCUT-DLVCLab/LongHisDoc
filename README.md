@@ -5,6 +5,23 @@
 ## 📖 Introduction
 We present **LongHisDoc**, a pioneering benchmark specifically designed to evaluate the capabilities of LLMs and LVLMs in long-context historical document understanding tasks. This benchmark includes 101 historical documents across 10 categories, with 1,012 expert-annotated question-answer pairs covering four types, and the evidence for the questions is drawn from three modalities. 
 
+* The Q&A pairs are provided in json format and contain the following attributes:
+```
+{
+            "doc_id": "9242",
+            "question": "成公三年，诸侯伐郑，军队驻扎在哪里？",
+            "answer": "伯牛",
+            "evidence_pages": "[3]",
+            "type": "Single Page",
+            "answer_type": "Str",
+            "evidence_modal": "layout",
+            "input_pages": "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]",
+            "item_id": "9242_1",
+            "book_name": "《01/24音註全文春秋括例始末左伝句読直解著者林堯叟（宋）／訓点者松永昌易[数量]25冊[書誌事項]刊本,寛文01年[旧蔵者]昌平坂学問所/M2015073110264263265_0001》",
+            "guji_type_zh": "史藏",
+            "guji_type_en": "History"
+  }
+```
 ## 🛠️ Installation
 
 * To begin, please download the dataset from [LongHisDoc Data](https://huggingface.co/datasets/qweq12433454/LongHisDoc).
