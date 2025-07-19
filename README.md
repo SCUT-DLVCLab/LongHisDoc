@@ -73,7 +73,7 @@ python score_calculation/compute_infer_acc_score.py
 
 The model scores are recorded in an Excel (.xlsx) file.
 
-#### Evaluation of the retrieverS
+#### Evaluation of the retrievers
 * It needs to use the corresponding code in retriever_infer for inference, and then the score calculation needs to be done using score_calculation/compute_retriever_recall_score.py.
 
 ## 📊 Evaluation Result
