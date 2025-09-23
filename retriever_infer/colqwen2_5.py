@@ -7,9 +7,9 @@ import sys
 # from colpali_engine.models import ColQwen2_5, ColQwen2_5_Processor
 from tqdm import tqdm
 import re
-sys.path.append('/data1/szy/LLM_code/GujiDoc_collections/test_code/infer_code')
+# sys.path.append('/data1/szy/LLM_code/GujiDoc_collections/test_code/infer_code')
 # from qwen2_5vl_colpali import Qwen2_5_VLConfig, Qwen2_5_VLForConditionalGeneration
-from colpali_engine_.models import ColQwen2_5, ColQwen2_5Processor
+from colpali_engine.models import ColQwen2_5, ColQwen2_5Processor
 
 # 假设你的JSON文件路径和图片目录路径
 
@@ -132,7 +132,7 @@ for root, dirs, files in os.walk(image_directory):
                 num_scores = scores.size(1)
 
                 # 动态设置 k 值，如果 scores 的长度小于 20，则使用 scores 的长度作为 k
-                k = min(20, num_scores)
+                k = min(50, num_scores)
 
                 # 获取 top_k_scores 和 top_k_indices
                 top_k_scores, top_k_indices = torch.topk(scores, k=k)
