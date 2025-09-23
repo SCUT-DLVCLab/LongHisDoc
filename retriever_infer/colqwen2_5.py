@@ -9,7 +9,7 @@ from tqdm import tqdm
 import re
 # sys.path.append('/data1/szy/LLM_code/GujiDoc_collections/test_code/infer_code')
 # from qwen2_5vl_colpali import Qwen2_5_VLConfig, Qwen2_5_VLForConditionalGeneration
-from colpali_engine.models import ColQwen2_5, ColQwen2_5Processor
+from colpali_engine.models import ColQwen2_5, ColQwen2_5_Processor
 
 # 假设你的JSON文件路径和图片目录路径
 
@@ -58,7 +58,7 @@ model = ColQwen2_5.from_pretrained(
     attn_implementation="flash_attention_2",
     device_map="cuda:0",  # or "mps" if on Apple Silicon
 ).eval()
-processor = ColQwen2_5Processor.from_pretrained(model_name)
+processor = ColQwen2_5_Processor.from_pretrained(model_name)
 
 # 遍历每个文件夹
 for root, dirs, files in os.walk(image_directory):
