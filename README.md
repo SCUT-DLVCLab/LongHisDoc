@@ -1,5 +1,8 @@
 # LongHisDoc: A Benchmark for Long-context Historical Document Understanding
 
+## 📢 News
+- **[2026-10-10]** Our paper, **LongHisDoc: A Comprehensive Benchmark for Chinese Long Historical Document Understanding**, is now available on [arXiv](https://arxiv.org/abs/2610.14531)!
+
 ![LongHisDoc](LongHisDoc_Overview.png)
 
 ## 📖 Introduction
